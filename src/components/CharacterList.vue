@@ -2,7 +2,7 @@
   <div>
     <div class="character-card" v-for="character in characters" :key="character.id">
       <div class="character-image">
-        <img :src="character.image" :alt="character.name" />
+        <img :src="character.image" :alt="character.name"/>
       </div>
       <div class="character-details">
         <h3>{{ character.name }}</h3>
@@ -10,45 +10,18 @@
         <p>Status: {{ character.status }}</p>
       </div>
     </div>
-    <div v-if="loading" class="loading">Loading...</div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      characters: [],
-      loading: false,
-      page: 1,
-    };
-  },
-  methods: {
-    loadCharacters() {
-      this.loading = true;
-      fetch(process.env.VUE_APP_URL + `/api/v1/characters?page=${this.page}`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data.results)
-            this.characters = [...this.characters, ...data.results];
-            this.page++;
-            this.loading = false;
-          })
-          .catch((error) => {
-            console.error('Error loading characters:', error);
-            this.loading = false;
-          });
-    },
-  },
-  mounted() {
-    this.loadCharacters();
-  },
-};
+<script setup>
+import useCharacters from "@/api/characters"
+import { onMounted } from "vue"
+
+const { characters, getCharacters } = useCharacters()
+
+onMounted(() => {
+  getCharacters()
+})
 </script>
 
 <style scoped>
@@ -71,10 +44,5 @@ export default {
 
 .character-details {
   text-align: center;
-}
-
-.loading {
-  text-align: center;
-  margin: 20px;
 }
 </style>
