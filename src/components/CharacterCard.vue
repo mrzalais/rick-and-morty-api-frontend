@@ -1,5 +1,5 @@
 <template>
-  <div class="character-card">
+  <div class="character-card" @click="viewCharacter">
     <div class="character-image">
       <img :src="character.image" :alt="character.name" />
     </div>
@@ -16,6 +16,11 @@ export default {
   props: {
     character: Object,
   },
+  methods: {
+    viewCharacter() {
+      this.$router.push({ name: 'character', params: { id: this.character.id } })
+    }
+  }
 };
 </script>
 
