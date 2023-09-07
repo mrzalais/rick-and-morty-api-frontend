@@ -2,9 +2,9 @@
   <div>
     <template v-if="!isLoading">
       <nav>
-        <router-link to="/" class="nav-link">Back to character List</router-link>
+        <router-link to="/">Back to character List</router-link>
       </nav>
-      <CharacterCard :character="character" />
+      <CharacterCard :character="character"/>
       <div>
         <h2>Extra Information</h2>
         <p>Gender: {{ character.gender }}</p>
@@ -24,10 +24,10 @@ import { useRoute } from 'vue-router';
 import useCharacters from '@/api/characters';
 import CharacterCard from "@/components/CharacterCard.vue";
 
-const { character, getCharacter, isLoading } = useCharacters()
-const route = useRoute()
+const { character, getCharacter, isLoading } = useCharacters();
+const route = useRoute();
 
 onMounted(async () => {
   await getCharacter(route.params.id);
-})
+});
 </script>

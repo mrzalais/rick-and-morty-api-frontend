@@ -1,7 +1,7 @@
 <template>
   <div class="character-card" @click="viewCharacter">
     <div class="character-image">
-      <img :src="character.image" :alt="character.name" />
+      <img :src="character.image" :alt="character.name"/>
     </div>
     <div class="character-details">
       <h3>{{ character.name }}</h3>
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     viewCharacter() {
-      this.$router.push({ name: 'character', params: { id: this.character.id } })
+      this.$router.push({ name: 'character', params: { id: this.character.id } });
     }
   }
 };
