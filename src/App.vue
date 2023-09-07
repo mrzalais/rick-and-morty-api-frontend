@@ -1,16 +1,15 @@
 <template>
-  <CharacterList></CharacterList>
+  <div id="app">
+    <div class="logo">
+      <img src="@/assets/logo.png" alt="Logo" />
+    </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-
-import CharacterList from "@/components/CharacterList";
-
 export default {
   name: 'App',
-  components: {
-    CharacterList
-  }
 }
 </script>
 
